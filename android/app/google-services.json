@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1023867656590",
+    "project_id": "kaizenteam-ba827",
+    "storage_bucket": "kaizenteam-ba827.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023867656590:android:17caf026fd3822d7132cdf",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9XHt-ck8IoHzFTK8Nib80iCrdI1NZBuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023867656590:android:5248c80c21a37293132cdf",
+        "android_client_info": {
+          "package_name": "com.example.kaizenteam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9XHt-ck8IoHzFTK8Nib80iCrdI1NZBuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
