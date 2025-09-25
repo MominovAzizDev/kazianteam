@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kaizenteam/presentation/auth/authState.dart';
-import 'package:kaizenteam/presentation/splash/splash.dart';
+import 'package:kaizenteam/controller/auth/authState.dart';
+import 'package:kaizenteam/view/home/bottomnavigationbar_page.dart';
+import 'package:kaizenteam/view/splash/splash.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 

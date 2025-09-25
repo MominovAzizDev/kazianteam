@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kaizenteam/presentation/auth/appAuth.dart';
+import 'package:kaizenteam/view/auth/appAuth.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

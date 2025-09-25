@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kaizenteam/presentation/home/widgets/activeChallengeCard_widgets.dart';
-import 'package:kaizenteam/presentation/home/widgets/level_point_widgets.dart';
-import 'package:kaizenteam/presentation/home/widgets/recentActivityCard_widgets.dart';
-import 'package:kaizenteam/presentation/home/widgets/teamProgressCard_widgets.dart';
+import 'package:kaizenteam/view/home/widgets/activeChallengeCard_widgets.dart';
+import 'package:kaizenteam/view/home/widgets/level_point_widgets.dart';
+import 'package:kaizenteam/view/home/widgets/recentActivityCard_widgets.dart';
+import 'package:kaizenteam/view/home/widgets/teamProgressCard_widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

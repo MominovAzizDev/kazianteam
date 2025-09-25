@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kaizenteam/presentation/auth/authState.dart';
-import 'package:kaizenteam/presentation/home/home_page.dart';
+import 'package:kaizenteam/controller/auth/authState.dart';
+import 'package:kaizenteam/view/home/bottomnavigationbar_page.dart';
 import 'package:provider/provider.dart';
 
 class Appauth extends StatefulWidget {
@@ -118,7 +118,7 @@ class _AppauthState extends State<Appauth> {
                 if (mounted) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => BottomnavigationbarPage()),
                   );
                 }
               }
@@ -201,7 +201,7 @@ class _AppauthState extends State<Appauth> {
                  if (mounted) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => BottomnavigationbarPage()),
                   );
                 }
               }
