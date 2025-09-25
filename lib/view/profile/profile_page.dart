@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaizenteam/view/auth/appAuth.dart';
 import 'package:kaizenteam/view/profile/widgets/stat_card_widget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -189,9 +190,10 @@ class ProfilePage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 14),
                 ),
                 onPressed: () {
-                  ScaffoldMessenger.of(
+                  Navigator.pushReplacement(
                     context,
-                  ).showSnackBar(SnackBar(content: Text("Signed Out")));
+                    MaterialPageRoute(builder: (context) => Appauth()),
+                  );
                 },
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaizenteam/view/challenges/challenges_view.dart';
 
 class ChallengecardWidget extends StatelessWidget {
   final String title;
@@ -9,7 +10,6 @@ class ChallengecardWidget extends StatelessWidget {
   final int points;
   final String difficulty;
   final double progress; 
-  final VoidCallback onViewDetails;
 
   const ChallengecardWidget({
     super.key,
@@ -21,7 +21,6 @@ class ChallengecardWidget extends StatelessWidget {
     required this.points,
     required this.difficulty,
     required this.progress,
-    required this.onViewDetails,
   });
 
   @override
@@ -142,7 +141,22 @@ class ChallengecardWidget extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: onViewDetails,
+              onPressed: (){
+                 Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChallengesView(
+                            title: "Process Improvement Initiative",
+                            description:
+                                "Share an idea to improve our daily workflow and eliminate waste",
+                            points: 100,
+                            participants: 24,
+                            timeLeft: "2 days left",
+                            progress: 0.75,
+                          ),
+                        ),
+                      );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 shape: RoundedRectangleBorder(

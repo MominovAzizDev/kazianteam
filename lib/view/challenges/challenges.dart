@@ -104,13 +104,8 @@ class _ChallengesState extends State<Challenges> {
                     points: 100,
                     difficulty: "Easy",
                     progress: 0.75,
-                    onViewDetails: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("View Details pressed")),
-                      );
-                    },
                   ),
-                   ChallengecardWidget(
+                  ChallengecardWidget(
                     title: "5S Workplace Organization",
                     description:
                         "Document and improve your workspace organization using 5S methodology",
@@ -120,11 +115,6 @@ class _ChallengesState extends State<Challenges> {
                     points: 250,
                     difficulty: "Medium",
                     progress: 0.3,
-                    onViewDetails: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("View Details pressed")),
-                      );
-                    },
                   ),
                 ],
               ),

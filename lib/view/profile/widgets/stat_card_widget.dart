@@ -17,7 +17,7 @@ class StatCardWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         color: Colors.white,
       ),
       padding: EdgeInsets.all(10),
@@ -31,7 +31,7 @@ class StatCardWidget extends StatelessWidget {
             children: [
               Text(
                 number,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.bold,),
               ),
               Text(
                 label,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:kaizenteam/view/learning/card_learning_widget.dart';
 class LearningWidgets extends StatelessWidget {
   final String title;
   final String description;
@@ -141,7 +141,28 @@ class LearningWidgets extends StatelessWidget {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14),
                 ),
-                onPressed: onPressed,
+                onPressed: () {
+                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CardLearningWidget(
+                        title: "5S Workplace Organization",
+                        description:
+                            "Master the 5S system for workplace organization and efficiency",
+                        level: "Intermediate",
+                        duration: "1.5 hours",
+                        lessons: "6 lessons",
+                        rating: 4.6,
+                        progress: 0.6,
+                        onContinue: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Continue pressed")),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
                 child: Text(buttonText, style: TextStyle(color: Colors.white)),
               ),
             ),

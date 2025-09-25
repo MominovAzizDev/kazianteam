@@ -23,7 +23,7 @@ class MainApp extends StatelessWidget {
       create: (_) => Authstate(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Splash(),
+        home: BottomnavigationbarPage(),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaizenteam/view/learning/card_learning_widget.dart';
 import 'package:kaizenteam/view/learning/widgets/learning_widgets.dart';
 
 class LearningPage extends StatefulWidget {
@@ -101,7 +102,30 @@ class _LearningPageState extends State<LearningPage> {
                     enrolled: 156,
                     dueDate: "2024-01-30",
                     buttonText: "Start Course",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CardLearningWidget(
+                            title: "5S Workplace Organization",
+                            description:
+                                "Master the 5S system for workplace organization and efficiency",
+                            level: "Intermediate",
+                            duration: "1.5 hours",
+                            lessons: "6 lessons",
+                            rating: 4.6,
+                            progress: 0.6,
+                            onContinue: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Continue pressed"),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: 12),
                   LearningWidgets(
@@ -115,25 +139,48 @@ class _LearningPageState extends State<LearningPage> {
                     dueDate: "2024-02-15",
                     buttonText: "Continue Learning",
                     progress: 0.6,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CardLearningWidget(
+                            title: "5S Workplace Organization",
+                            description:
+                                "Master the 5S system for workplace organization and efficiency",
+                            level: "Intermediate",
+                            duration: "1.5 hours",
+                            lessons: "6 lessons",
+                            rating: 4.6,
+                            progress: 0.6,
+                            onContinue: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                 SnackBar(
+                                  content: Text("Continue pressed"),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
             ),
 
-             LearningWidgets(
-                    title: "5S Workplace Organization",
-                    description:
-                        "Master the 5S system for workplace organization and efficiency",
-                    duration: "1.5 hours",
-                    lessons: 6,
-                    rating: 4.6,
-                    enrolled: 203,
-                    dueDate: "2024-02-15",
-                    buttonText: "Continue Learning",
-                    progress: 0.6,
-                    onPressed: () {},
-                  ),
+            LearningWidgets(
+              title: "5S Workplace Organization",
+              description:
+                  "Master the 5S system for workplace organization and efficiency",
+              duration: "1.5 hours",
+              lessons: 6,
+              rating: 4.6,
+              enrolled: 203,
+              dueDate: "2024-02-15",
+              buttonText: "Continue Learning",
+              progress: 0.6,
+              onPressed: () {},
+            ),
 
             Center(
               child: Column(
