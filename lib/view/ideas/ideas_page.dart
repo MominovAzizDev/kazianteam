@@ -1,6 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:kaizenteam/view/ideas/widgets/idea_card_widget.dart';
-import 'package:kaizenteam/view/ideas/widgets/ideascards_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'widgets/idea_card_widget.dart';
+import 'widgets/ideascards_widget.dart';
+import 'widgets/new_idea_page_widget.dart';
 
 class IdeasPage extends StatefulWidget {
   @override
@@ -10,11 +14,49 @@ class IdeasPage extends StatefulWidget {
 class _IdeasPageState extends State<IdeasPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  List<Map<String, dynamic>> _ideas = [];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _loadIdeas();
+  }
+
+  Future<void> _loadIdeas() async {
+    final prefs = await SharedPreferences.getInstance();
+    final stored = prefs.getString("ideas");
+    if (stored != null) {
+      setState(() {
+        _ideas = List<Map<String, dynamic>>.from(json.decode(stored));
+      });
+    }
+  }
+
+  Future<void> _saveIdeas() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("ideas", json.encode(_ideas));
+  }
+
+  Future<void> _addNewIdea() async {
+    final newIdea = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NewIdeaPageWidget()),
+    );
+
+    if (newIdea != null) {
+      setState(() {
+        _ideas.add(newIdea);
+      });
+      _saveIdeas();
+    }
+  }
+
+  void _updateIdea(int index, Map<String, dynamic> updatedIdea) {
+    setState(() {
+      _ideas[index] = updatedIdea;
+    });
+    _saveIdeas();
   }
 
   @override
@@ -98,7 +140,7 @@ class _IdeasPageState extends State<IdeasPage>
                           borderRadius: BorderRadius.circular(6),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: _addNewIdea,
                     ),
                   ],
                 ),
@@ -129,18 +171,23 @@ class _IdeasPageState extends State<IdeasPage>
         children: [
           _buildIdeasList(),
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.add),
-                SizedBox(height: 10),
-                Text(
-                  "No Ideas Yet",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Text("Submit your first idea to get started."),
-              ],
-            ),
+            child: _ideas.isEmpty
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.add),
+                      SizedBox(height: 10),
+                      Text(
+                        "No Ideas Yet",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text("Submit your first idea to get started."),
+                    ],
+                  )
+                : _buildIdeasList(myIdeasOnly: true),
           ),
           ListView(
             padding: EdgeInsets.all(16),
@@ -169,36 +216,26 @@ class _IdeasPageState extends State<IdeasPage>
     );
   }
 
-  Widget _buildIdeasList() {
-    return ListView(
+  Widget _buildIdeasList({bool myIdeasOnly = false}) {
+    final ideas = myIdeasOnly
+        ? _ideas.where((idea) => idea["author"] == "You").toList()
+        : _ideas;
+
+    return ListView.builder(
       padding: EdgeInsets.all(16),
-      children: [
-        IdeaCardWidget(
-          title: "Mobile App for Employee Directory",
-          description:
-              "Create a mobile app that allows employees to easily find and contact colleagues across departments.",
-          author: "Alex Chen",
-          date: "2024-01-12",
-          status: "Under Review",
-          statusColor: Colors.amber.shade200,
-          likes: 24,
-          dislikes: 3,
-          comments: 8,
-        ),
-        SizedBox(height: 12),
-        IdeaCardWidget(
-          title: "Flexible Work Hours Policy",
-          description:
-              "Implement flexible work schedule allowing employees to choose their start and end times.",
-          author: "Maria Rodriguez",
-          date: "2024-01-10",
-          status: "Approved",
-          statusColor: Colors.green.shade200,
-          likes: 42,
-          dislikes: 8,
-          comments: 15,
-        ),
-      ],
+      itemCount: ideas.length,
+      itemBuilder: (context, index) {
+        final idea = ideas[index];
+        return Column(
+          children: [
+            IdeaCardWidget(
+              idea: idea,
+              onUpdate: (updatedIdea) => _updateIdea(index, updatedIdea),
+            ),
+            SizedBox(height: 12),
+          ],
+        );
+      },
     );
   }
 }

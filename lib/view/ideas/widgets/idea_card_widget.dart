@@ -1,28 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kaizenteam/view/ideas/idea_detail_page.dart';
 
 class IdeaCardWidget extends StatelessWidget {
-  final String title;
-  final String description;
-  final String author;
-  final String date;
-  final String status;
-  final Color statusColor;
-  final int likes;
-  final int dislikes;
-  final int comments;
+  final Map<String, dynamic> idea;
+  final void Function(Map<String, dynamic>) onUpdate;
 
-  const IdeaCardWidget({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.author,
-    required this.date,
-    required this.status,
-    required this.statusColor,
-    required this.likes,
-    required this.dislikes,
-    required this.comments,
-  });
+  const IdeaCardWidget({super.key, required this.idea, required this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +22,23 @@ class IdeaCardWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    title,
+                    idea["title"],
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: statusColor,
+                    color: idea["statusColor"],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text(status, style: TextStyle(fontSize: 12)),
+                  child: Text(idea["status"], style: TextStyle(fontSize: 12)),
                 ),
               ],
             ),
             SizedBox(height: 6),
             Text(
-              description,
+              idea["description"],
               style: TextStyle(color: Colors.black87, fontSize: 13),
             ),
             SizedBox(height: 12),
@@ -67,13 +50,13 @@ class IdeaCardWidget extends StatelessWidget {
                   child: Icon(Icons.person, size: 14, color: Colors.white),
                 ),
                 SizedBox(width: 6),
-                Text(author, style: TextStyle(fontSize: 12)),
+                Text(idea["author"], style: TextStyle(fontSize: 12)),
                 SizedBox(width: 6),
                 Text("•", style: TextStyle(color: Colors.grey)),
                 SizedBox(width: 6),
                 Icon(Icons.access_time, size: 14, color: Colors.black54),
                 SizedBox(width: 4),
-                Text(date, style: TextStyle(fontSize: 12)),
+                Text(idea["date"], style: TextStyle(fontSize: 12)),
               ],
             ),
             SizedBox(height: 12),
@@ -85,7 +68,7 @@ class IdeaCardWidget extends StatelessWidget {
                   color: Colors.green,
                 ),
                 SizedBox(width: 4),
-                Text("$likes", style: TextStyle(fontSize: 12)),
+                Text("${idea["likes"]}", style: TextStyle(fontSize: 12)),
                 SizedBox(width: 12),
                 Icon(
                   Icons.thumb_down_alt_outlined,
@@ -93,7 +76,7 @@ class IdeaCardWidget extends StatelessWidget {
                   color: Colors.red,
                 ),
                 SizedBox(width: 4),
-                Text("$dislikes", style: TextStyle(fontSize: 12)),
+                Text("${idea["dislikes"]}", style: TextStyle(fontSize: 12)),
                 SizedBox(width: 12),
                 Icon(
                   Icons.chat_bubble_outline,
@@ -101,7 +84,7 @@ class IdeaCardWidget extends StatelessWidget {
                   color: Colors.black54,
                 ),
                 SizedBox(width: 4),
-                Text("$comments", style: TextStyle(fontSize: 12)),
+                Text("${idea["comments"]}", style: TextStyle(fontSize: 12)),
               ],
             ),
             SizedBox(height: 12),
@@ -111,7 +94,17 @@ class IdeaCardWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                final updatedIdea = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => IdeaDetailPage(idea: idea),
+                  ),
+                );
+                if (updatedIdea != null) {
+                  onUpdate(updatedIdea);
+                }
+              },
               child: Text("View Details"),
             ),
           ],
